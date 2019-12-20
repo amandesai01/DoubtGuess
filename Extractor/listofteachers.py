@@ -48,4 +48,4 @@ def GetTeacher(empid):
     Dict['status'] = 'Fail'
     return Dict
 
-print(json.dumps(GetAllTeachers(), indent=4))
+# print(json.dumps(GetAllTeachers(), indent=4))
