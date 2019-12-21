@@ -1,17 +1,18 @@
 from Extractor import get
 import json
+from Amplifier import Amplify
 
 def setpersonalprofile(empid):
-    personalprofile = get.PersonalProfile(empid)
-    return personalprofile
+    data = get.PersonalProfile(empid)
+    return Amplify.filterpersonalprofile(data)
 
 def setbiography(empid):
-    biography = get.Biography(empid)
-    return biography
+    data = get.Biography(empid)
+    return Amplify.filterbiography(data)
 
 def setpublications(empid):
-    publications = get.Publications(empid)
-    return publications
+    data = get.Publications(empid)
+    return Amplify.filterpublications(data)
     
 # with open('temp.json', 'w') as fp:
 #     json.dump(setpersonalprofile('0000160932'), fp, indent=4)
