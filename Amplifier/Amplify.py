@@ -19,7 +19,7 @@ def filterString(strElement):
 
     return filteredDataset
 
-def rawData(raw):
+def filterpersonalprofile(raw):
     # print(raw)
     raw = raw.get("d")
     # print(type(raw))
@@ -38,5 +38,13 @@ def rawData(raw):
         rawDict[key] = value
     return rawDict
 
-def filterpersonalprofile(data):
-    return rawData(data)
+def filterbiography(data):
+    data = json.loads(data['d'])
+    properdata = {}
+    textx = BeautifulSoup(data['BIOGRAPHY_HTML'], 'html.parser').get_text()
+    properdata['biographyAll'] = textx
+    textx = textx.splitlines()
+    properdata['Biography'] = textx
+    properdata['MediaCaption'] = data['MEDIA_CAPTION']
+    return properdata
+
