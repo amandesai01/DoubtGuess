@@ -1,6 +1,56 @@
 from bs4 import BeautifulSoup
 import json
 
+def decomposeCommonList(ele):
+    val = []
+    if ele['DTO1']:
+        val.extend(BeautifulSoup(ele['DTO1'], 'html.parser').get_text().splitlines())
+    if ele['DTO2']:
+        val.extend(BeautifulSoup(ele['DTO2'], 'html.parser').get_text().splitlines())
+    if ele['DTO3']:
+        val.extend(BeautifulSoup(ele['DTO3'], 'html.parser').get_text().splitlines())
+    if ele['DTO4']:
+        val.extend(BeautifulSoup(ele['DTO4'], 'html.parser').get_text().splitlines())
+    if ele['DTO5']:
+        val.extend(BeautifulSoup(ele['DTO5'], 'html.parser').get_text().splitlines())
+    if ele['CommonList']:
+        for i in ele['CommonList']:
+            try:
+                val.extend(decomposeCommonList(i))
+            except:
+                continue
+    return val
+
+def decomposeDto(ele):
+    key = ele['DTO1']
+    val = []
+    reply = {}
+    if ele['DTO2']:
+        val.extend(BeautifulSoup(ele['DTO2'], 'html.parser').get_text().splitlines())
+    if ele['DTO3']:
+        val.extend(BeautifulSoup(ele['DTO3'], 'html.parser').get_text().splitlines())
+    if ele['DTO4']:
+        val.extend(BeautifulSoup(ele['DTO4'], 'html.parser').get_text().splitlines())
+    if ele['DTO5']:
+        val.extend(BeautifulSoup(ele['DTO5'], 'html.parser').get_text().splitlines())
+    if ele['CommonList']:
+        for i in ele['CommonList']:
+            try:
+                val.extend(decomposeCommonList(i))
+            except:
+                continue
+        # for i in ele['CommonList']:
+        #     dic = decomposeDto(i)
+        #     reply[list(dic.keys())[0]] = dic[list(dic.keys())[0]]
+    
+    reply[key] = val
+    print(json.dumps(reply, indent=4))
+    return reply
+
+    
+        
+
+
 def filterString(strElement):
     dataset = strElement.splitlines()
     filteredDataset = [] #initiate empty list
@@ -29,8 +79,7 @@ def filterpersonalprofile(raw):
     for i in raw:
         key = i["DTO1"]
         try:
-            soup = BeautifulSoup(i["CommonList"][0]["DTO1"], 'html.parser')
-            dataToken = soup.get_text()
+            dataToken = BeautifulSoup(i["CommonList"][0]["DTO1"], 'html.parser').get_text()
             dataset = filterString(dataToken)
             value = dataset
         except IndexError:  # This specifies that specific teacher has nothing to showoff in that section
@@ -48,3 +97,13 @@ def filterbiography(data):
     properdata['MediaCaption'] = data['MEDIA_CAPTION']
     return properdata
 
+def filterpublications(data):
+    data = json.loads(data['d'])
+    ndata = {}
+    co = 0
+    for i in data:
+        temp = decomposeDto(i)
+        ndata[co] = temp
+        co = co + 1
+        # pass
+    return ndata

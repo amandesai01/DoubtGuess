@@ -14,6 +14,6 @@ def setpublications(empid):
     data = get.Publications(empid)
     return Amplify.filterpublications(data)
     
-# with open('temp.json', 'w') as fp:
-#     data = setbiography('0000160981')
-#     json.dump(data, fp, indent=4)
+with open('temp.json', 'w') as fp:
+    data = setpublications('0000160120')
+    json.dump(data, fp, indent=4)
