@@ -16,14 +16,17 @@ def setpublications(empid):
 
 def GenerateData():
     eachteacher = {}
+    finaldata = {}
     index = listofteachers.GetAllTeachers()
     for i in index:
+        # print(eachteacher['empid'])
         eachteacher = index[i]
+        print("Processing:" + eachteacher['empid'])
         eachteacher.update(setpersonalprofile(eachteacher['empid']))
         eachteacher.update(setbiography(eachteacher['empid']))
         eachteacher.update(setpublications(eachteacher['empid']))
-        return eachteacher
-    return index
+        finaldata[eachteacher['empid']] = eachteacher
+    return finaldata
     
 with open('temp.json', 'w') as fp:
     data = GenerateData()
