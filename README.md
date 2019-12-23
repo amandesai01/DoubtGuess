@@ -57,6 +57,29 @@
             "INTERNATIONAL PUBLICATION": []
         }
     }
+    //List Continues for all teachers.
 }
 
-<pre>
+</pre>
+
+You can always use **search.py** to find empid and then fire it to get other details.
+
+## Usage:
+
+### Example:
+
+```python
+from doubtguess import GenerateData
+from search import teacherWithName, teacherWithEmail
+
+Data = GenerateData()
+TeacherData = Data[teacherWithName('Mr.  Abhijeet Uday Karmarkar')]
+TeacherData = Data[teacherWithEmail('abhijeet@somaiya.edu')]
+```
+After this, complete information block of that teacher will be stored in "TeacherData". You can query however you want.
+
+<hr>
+<div align="center">
+<h3> Made with ❤️ By Aman Desai</h3>
+</div>
+
