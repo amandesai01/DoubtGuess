@@ -44,7 +44,7 @@ def decomposeDto(ele):
         #     reply[list(dic.keys())[0]] = dic[list(dic.keys())[0]]
     
     reply[key] = val
-    print(json.dumps(reply, indent=4))
+    # print(json.dumps(reply, indent=4))
     return reply
 
     
@@ -90,11 +90,14 @@ def filterpersonalprofile(raw):
 def filterbiography(data):
     data = json.loads(data['d'])
     properdata = {}
-    textx = BeautifulSoup(data['BIOGRAPHY_HTML'], 'html.parser').get_text()
-    properdata['biographyAll'] = textx
-    textx = textx.splitlines()
-    properdata['Biography'] = textx
-    properdata['MediaCaption'] = data['MEDIA_CAPTION']
+    try:
+        textx = BeautifulSoup(data['BIOGRAPHY_HTML'], 'html.parser').get_text()
+        properdata['biographyAll'] = textx
+        textx = textx.splitlines()
+        properdata['Biography'] = textx
+        properdata['MediaCaption'] = data['MEDIA_CAPTION']
+    except:
+        return properdata
     return properdata
 
 def filterpublications(data):
