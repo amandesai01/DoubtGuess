@@ -27,6 +27,13 @@ def GenerateData():
         eachteacher.update(setpublications(eachteacher['empid']))
         finaldata[eachteacher['empid']] = eachteacher
     return finaldata
+
+def getTeacher(empid):
+    data = {}
+    data.update(setpersonalprofile(eachteacher['empid']))
+    data.update(setpersonalprofile(eachteacher['empid']))
+    data.update(setpersonalprofile(eachteacher['empid']))
+    return data
     
 with open('temp.json', 'w') as fp:
     data = GenerateData()
