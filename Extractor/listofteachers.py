@@ -2,7 +2,7 @@ import requests
 import json
 
 def SendRequest():
-    r = requests.get('https://kjsce.somaiya.edu/ajax/ajaxCall.aspx?action=Faculty&instituteid=16&type=institute&value=16&pageSize=200&pageNumber=0&site=kjsce').json()
+    r = requests.get('https://kjsce.somaiya.edu/ajax/ajaxCall.aspx?action=Faculty&instituteid=16&type=institute&value=16&pageSize=200&pageNumber=0&site=kjsce-old').json()
     return r;
 
 def GetDepartment(i):
