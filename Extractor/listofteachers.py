@@ -2,7 +2,7 @@ import requests
 import json
 
 def SendRequest():
-    r = requests.get('https://kjsce.somaiya.edu/ajax/ajaxCall.aspx?action=Faculty&instituteid=16&type=institute&value=16&pageSize=200&pageNumber=0&site=kjsce-old').json()
+    r = requests.get('https://kjsce-old.somaiya.edu/ajax/ajaxCall.aspx?action=Faculty&instituteid=16&type=institute&value=16&pageSize=200&pageNumber=0&site=kjsce-old').json()
     return r;
 
 def GetDepartment(i):
@@ -31,7 +31,7 @@ def GetAllTeachers():
     count = 0
     for i in r:
         Dict[count] = {'empid': i['empid'], 'name': i['name'], 'department': GetDepartment(i), 'email': i['email'],
-                       'position': i['position'], 'photo': "https://kjsce.somaiya.edu" + i['photo'], 'nameSearch' : i['name'].split(' ')}
+                       'position': i['position'], 'photo': "https://kjsce-old.somaiya.edu" + i['photo'], 'nameSearch' : i['name'].split(' ')}
         count += 1
     # name also stored in array because querying in name is difficult for search purpose.
     return Dict
